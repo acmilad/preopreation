@@ -1,0 +1,53 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Mirzaei (generated)" id="1693570335812-1">
+        <createTable tableName="patient">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="patient_pkey"/>
+            </column>
+            <column name="age" type="INTEGER"/>
+            <column name="attendingphysician" type="VARCHAR(255)"/>
+            <column name="candidate" type="SMALLINT"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="fathername" type="VARCHAR(255)"/>
+            <column name="firstname" type="VARCHAR(255)"/>
+            <column name="lastname" type="VARCHAR(255)"/>
+            <column name="probablediagnosis" type="VARCHAR(255)"/>
+            <column name="sex" type="SMALLINT"/>
+            <column name="unit_no" type="BIGINT"/>
+            <column name="ward" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Mirzaei (generated)" id="1693570335812-2">
+        <createSequence sequenceName="question_seq"/>
+    </changeSet>
+    <changeSet author="Mirzaei (generated)" id="1693570335812-3">
+        <createTable tableName="answer">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="answer_pkey"/>
+            </column>
+            <column name="value" type="VARCHAR(255)"/>
+            <column name="patient_id" type="BIGINT"/>
+            <column name="question_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Mirzaei (generated)" id="1693570335812-4">
+        <createTable tableName="question">
+            <column name="question_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="question_pkey"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="parent_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Mirzaei (generated)" id="1693570335812-5">
+        <addForeignKeyConstraint baseColumnNames="patient_id" baseTableName="answer" constraintName="fk13l92kq8bu8sffj106gpt36jm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="patient" validate="true"/>
+    </changeSet>
+    <changeSet author="Mirzaei (generated)" id="1693570335812-6">
+        <addForeignKeyConstraint baseColumnNames="parent_id" baseTableName="question" constraintName="fk4hfch0i825ve84h2fi5et4nut" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="question_id" referencedTableName="question" validate="true"/>
+    </changeSet>
+    <changeSet author="Mirzaei (generated)" id="1693570335812-7">
+        <addForeignKeyConstraint baseColumnNames="question_id" baseTableName="answer" constraintName="fkfiomvt17psxodcis3d8nmopx8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="question_id" referencedTableName="question" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
